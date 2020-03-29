@@ -105,8 +105,8 @@ bool getSafeSeq() {
         for(int i=0; i<totalResources; i++) tempResource[i] = available[i];
         bool finished[totalProcesses];
         for(int i=0; i<totalProcesses; i++) finished[i] = false;
-        int nfinished=0;
-        while(nfinished <totalProcesses) {
+        int totalfinished=0;
+        while(totalfinished <totalProcesses) {
                 bool safe = false;
 
                 for(int i=0; i<totalProcesses; i++) {
@@ -122,9 +122,9 @@ bool getSafeSeq() {
                                 if(possiblecase) {
                                         for(int j=0; j<totalResources; j++)
                                                 tempResource[j] += allocated[i][j];
-                                        safeSeq[nfinished] = i;
+                                        safeSeq[totalfinished] = i;
                                         finished[i] = true;
-                                        ++nfinished;
+                                        ++totalfinished;
                                         safe = true;
                                 }
                         }
