@@ -22,13 +22,13 @@ void* processFunction(void* );
 int main(int argc, char** argv) {
 	srand(time(NULL));
 
-        printf("\nEnter the Number of processes");
+        printf("\nEnter the Number of processes to be executed");
         scanf("%d", &totalProcesses);
-        printf("\nEnter the Number of resources");
+        printf("\nEnter the Number of resources to each process");
         scanf("%d", &totalResources);
 
         available = (int *)malloc(totalResources * sizeof(*available));
-        printf("\nCurrently Available resource are");
+        printf("\n give the info of Currently Available resources are");
         for(int i=0; i<totalResources; i++)
                 scanf("%d", &available[i]);
 
@@ -48,7 +48,7 @@ int main(int argc, char** argv) {
         }
         printf("\n");
         for(int i=0; i<totalProcesses; i++) {
-                printf("\nMaximum resource required by process %d", i+1);
+                printf("\nMaximum resource required by process are %d", i+1);
                 for(int j=0; j<totalResources; j++)
                         scanf("%d", &maximumRequired[i][j]);
         }
