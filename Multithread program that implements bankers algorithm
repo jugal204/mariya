@@ -16,7 +16,7 @@ int nProcessRange= 0;
 pthread_mutex_t locked;
 pthread_cond_t condition;
 
-bool getSafeSequence();
+bool getSafeSeq();
 
 void* processFunction(void* );
 int main(int argc, char** argv) {
@@ -175,7 +175,7 @@ void* processFunction(void *arg) {
 
         printf("\nNow Available : ");
         for(int i=0; i<totalResources; i++)
-                printf("%2d", availble[i]);
+                printf("%2d", available[i]);
         printf("\n\n");
         sleep(1);
         nProcessRange++;
