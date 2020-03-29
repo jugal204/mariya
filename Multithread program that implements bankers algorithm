@@ -27,7 +27,7 @@ int main(int argc, char** argv) {
         printf("\nEnter the Number of resources");
         scanf("%d", &totalResources);
 
-        available = (int *)malloc(nResources * sizeof(*available));
+        available = (int *)malloc(totalResources * sizeof(*available));
         printf("\nCurrently Available resource are");
         for(int i=0; i<totalResources; i++)
                 scanf("%d", &available[i]);
@@ -58,7 +58,7 @@ int main(int argc, char** argv) {
                 need[i] = (int *)malloc(totalResources * sizeof(**need));
         for(int i=0; i<totalProcesses; i++)
                 for(int j=0; j<totalResources; j++)
-                        need[i][j] = maxRequired[i][j] - allocated[i][j];
+                        need[i][j] = maximumRequired[i][j] - allocated[i][j];
 
 	safeSeq = (int *)malloc(totalProcesses * sizeof(*safeSeq));
         for(int i=0; i<totalProcesses; i++) safeSeq[i] = -1;
@@ -89,11 +89,11 @@ int main(int argc, char** argv) {
         free(available);
         for(int i=0; i<totalProcesses; i++) {
                 free(allocated[i]);
-                free(maxRequired[i]);
+                free(maximumRequired[i]);
 		free(need[i]);
         }
         free(allocated);
-        free(maxRequired);
+        free(maximumRequired);
 	free(need);
         free(safeSeq);
 }
@@ -111,15 +111,15 @@ bool getSafeSeq() {
 
                 for(int i=0; i<totalProcesses; i++) {
                         if(!finished[i]) {
-                                bool possible = true;
+                                bool possiblecase = true;
 
                                 for(int j=0; j<totalResources; j++)
                                         if(need[i][j] > tempResource[j]) {
-                                                possible = false;
+                                                possiblecase = false;
                                                 break;
                                         }
 
-                                if(possible) {
+                                if(possiblecase) {
                                         for(int j=0; j<totalResources; j++)
                                                 tempResource[j] += allocated[i][j];
                                         safeSeq[nfinished] = i;
@@ -139,7 +139,7 @@ bool getSafeSeq() {
 }
 
 
-void* processCode(void *arg) {
+void* processFunction(void *arg) {
         int p = *((int *) arg);
 
         pthread_mutex_lock(&locked)
