@@ -142,7 +142,7 @@ bool getSafeSeq() {
 void* processFunction(void *arg) {
         int p = *((int *) arg);
 
-        pthread_mutex_lock(&locked)
+        pthread_mutex_lock(&locked);
         
         while(p != safeSeq[nProcessRange])
                 pthread_cond_wait(&condition, &locked);
